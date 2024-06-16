@@ -7,13 +7,39 @@ import { Button } from "@/components/ui/button";
 export const UploadDoc = () => {
   const [document, setDocument] = useState<File | null | undefined>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [pdfText, setPdfText] = useState("");
-
+  const [error, setError] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!document) {
+      setError("Please upload the document");
+      return;
+    }
+
     setIsLoading(true);
-    console.log(document);
+
+    const formData = new FormData();
+    formData.append("pdf", document as Blob);
+
+    try {
+      const res = await fetch("/api/quiz/generate", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (res.status === 200) {
+        const data = await res.json();
+        const out = data.result.kwargs.content
+          .replace("```json", "")
+          .replace("```", "")
+          .trim();
+        console.log(out);
+      }
+    } catch (error) {
+      console.error("error while generating", error);
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -26,24 +52,27 @@ export const UploadDoc = () => {
           htmlFor="document"
           className="bg-secondary w-full flex h-20 rounded-md border-4 border-dashed border-blue-900 relative"
         >
-          <div className="absolute inset-0 m-auto flex justify-center items-center cursor-pointer">
+          <div className="absolute inset-0 m-auto flex justify-center items-center">
             {document && document?.name
               ? document.name
               : "Select a file to upload 📄"}
           </div>
+          <input
+            type="file"
+            id="document"
+            accept="application/pdf"
+            onChange={(e) => setDocument(e.target.files?.[0])}
+            className="relative block w-full h-full z-50 opacity-0 cursor-pointer"
+          />
         </label>
-        <input
-          type="file"
-          id="document"
-          accept="application/pdf"
-          onChange={(e) => setDocument(e.target.files?.[0])}
-          className="relative block w-full h-full z-50 opacity-0"
-        />
+
+        {error && <p className="text-rose-500">{error}</p>}
+
         <Button
           type="submit"
           size="lg"
           className="mt-2"
-          disabled={!document || isLoading}
+          disabled={isLoading}
         >
           Generate Quiz ✨
         </Button>
