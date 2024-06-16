@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 export const UploadDoc = () => {
   const [document, setDocument] = useState<File | null | undefined>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [pdfText, setPdfText] = useState("");
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
