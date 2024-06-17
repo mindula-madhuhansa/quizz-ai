@@ -1,18 +1,16 @@
 import { cn } from "@/lib/utils";
 
 type Props = {
-  isCorrect: boolean | null;
+  isCorrect: boolean | null | undefined;
   correctAnswer: string;
 };
 
 export const ResultCard = ({ isCorrect, correctAnswer }: Props) => {
-  if (isCorrect === null) return null;
+  if (isCorrect === null || isCorrect === undefined) return null;
 
   const result = isCorrect
     ? "Correct!"
     : `Incorrect! The correct answer is ${correctAnswer}`;
-
-  const borderClasses = isCorrect ? "border-green-500" : "border-rose-500";
 
   return (
     <div
