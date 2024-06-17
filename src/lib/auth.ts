@@ -1,7 +1,8 @@
-import NextAuth, { type Session, type User } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import { db } from "./db/index";
+import GoogleProvider from "next-auth/providers/google";
+import NextAuth, { type Session, type User } from "next-auth";
+
+import { db } from "@/db";
 
 export const {
   handlers: { GET, POST },

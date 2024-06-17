@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SessionProvider } from "next-auth/react";
+
 import "./globals.css";
+import { Navbar } from "@/components/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +20,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={"dark"}>{children}</body>
+      <SessionProvider>
+        <body className={"dark"}>
+          <Navbar />
+          {children}
+        </body>
+      </SessionProvider>
     </html>
   );
 }
