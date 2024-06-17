@@ -30,11 +30,7 @@ export const UploadDoc = () => {
 
       if (res.status === 200) {
         const data = await res.json();
-        const out = data.result.kwargs.content
-          .replace("```json", "")
-          .replace("```", "")
-          .trim();
-        console.log(out);
+        console.log(data);
       }
     } catch (error) {
       console.error("error while generating", error);
@@ -71,7 +67,7 @@ export const UploadDoc = () => {
         <Button
           type="submit"
           size="lg"
-          className="mt-2"
+          className="mt-4"
           disabled={isLoading}
         >
           Generate Quiz ✨

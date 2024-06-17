@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { HumanMessage } from "@langchain/core/messages";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
-import { JsonOutputFunctionsParser } from "langchain/output_parsers";
+
+import saveQuiz from "./saveToDb";
 
 export async function POST(req: NextRequest) {
   const body = await req.formData();
@@ -29,62 +29,40 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const model = new ChatGoogleGenerativeAI({
-      apiKey: process.env.GEMINI_AI_API_KEY,
+    const genAI = new GoogleGenerativeAI(
+      process.env.GEMINI_AI_API_KEY as string
+    );
+
+    const model = genAI.getGenerativeModel({
       model: "gemini-1.5-flash",
     });
 
-    const parser = new JsonOutputFunctionsParser();
-    const extractionFunctionSchema = {
-      name: "extractor",
-      description: "Extracts fields from the output",
-      parameters: {
-        type: "object",
-        properties: {
-          quiz: {
-            type: "object",
-            properties: {
-              name: { type: "string" },
-              questions: {
-                type: "array",
-                items: {
-                  type: "object",
-                  properties: {
-                    questionText: { type: "string" },
-                    answers: {
-                      type: "array",
-                      items: {
-                        type: "object",
-                        properties: {
-                          answerText: { type: "string" },
-                          isCorrect: { type: "boolean" },
-                        },
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-    };
-
-    const runnable = model.bind({}).pipe(parser);
-
-    const message = new HumanMessage({
-      content: [
+    const chat = model.startChat({
+      history: [
         {
-          type: "text",
-          text: prompt + "\n" + text.join("\n"),
+          role: "user",
+          parts: [
+            {
+              text: prompt,
+            },
+          ],
         },
       ],
     });
 
-    const result = await model.invoke([message]);
-    console.log(result);
+    const result = await chat.sendMessage(text.join("\n"));
+    const response = await result.response;
+    const res = response
+      .text()
+      .replace("```json", "")
+      .replace("```", "")
+      .trim();
 
-    return NextResponse.json({ result }, { status: 200 });
+    const responseJson = JSON.parse(res);
+
+    const { quizId } = await saveQuiz(responseJson);
+
+    return NextResponse.json({ quizId }, { status: 200 });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

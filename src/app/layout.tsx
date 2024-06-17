@@ -5,9 +5,9 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Quizz AI",
+  title: "Tutor AI",
   description:
-    "Quizz AI is a quiz app that uses AI to generate questions and answers.",
+    "Tutor AI is a quiz app that uses AI to generate questions and answers.",
 };
 
 export default function RootLayout({

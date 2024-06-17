@@ -122,7 +122,7 @@ export default function Quiz() {
 
       <main className="flex justify-center flex-1">
         {!started ? (
-          <h1 className="text-3xl font-semibold">Welcome to Quizz Page👋</h1>
+          <h1 className="text-3xl font-semibold">Welcome to Quiz Page👋</h1>
         ) : (
           <div>
             <h2 className="text-3xl font-semibold">

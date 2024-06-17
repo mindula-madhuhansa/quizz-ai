@@ -1,56 +1,81 @@
 {
-  "result": {
-    "lc": 1,
-    "type": "constructor",
-    "id": ["langchain_core", "messages", "AIMessage"],
-    "kwargs": {
-      "content": "```json\n{\n \"name\": \"Pulse and Wave Shaping Circuits with Diodes\",\n \"description\": \"This quiz tests your understanding of diode limiters, biased limiters, clampers, and voltage multipliers as discussed in Lecture 4 of BECS 11413 Basic Electronics.\",\n \"questions\": [\n {\n \"questionText\": \"What is the primary function of a diode limiter?\",\n \"answers\": [\n {\n \"answerText\": \"To amplify signal voltages.\",\n \"isCorrect\": false\n },\n {\n \"answerText\": \"To clip off portions of signal voltages above or below certain levels.\",\n \"isCorrect\": true\n },\n {\n \"answerText\": \"To convert AC to DC.\",\n \"isCorrect\": false\n },\n {\n \"answerText\": \"To generate square waves.\",\n \"isCorrect\": false\n }\n ]\n },\n {\n \"questionText\": \"What is the main difference between a diode limiter and a biased limiter?\",\n \"answers\": [\n {\n \"answerText\": \"Biased limiters use a DC voltage to set the clipping level.\",\n \"isCorrect\": true\n },\n {\n \"answerText\": \"Diode limiters are more efficient than biased limiters.\",\n \"isCorrect\": false\n },\n {\n \"answerText\": \"Biased limiters are only used for positive voltage clipping.\",\n \"isCorrect\": false\n },\n {\n \"answerText\": \"Diode limiters are used in high-voltage applications.\",\n \"isCorrect\": false\n }\n ]\n },\n {\n \"questionText\": \"What is the purpose of a clamper circuit?\",\n \"answers\": [\n {\n \"answerText\": \"To increase the amplitude of an AC signal.\",\n \"isCorrect\": false\n },\n {\n \"answerText\": \"To add a DC level to an AC voltage.\",\n \"isCorrect\": true\n },\n {\n \"answerText\": \"To filter out unwanted frequencies.\",\n \"isCorrect\": false\n },\n {\n \"answerText\": \"To generate a square wave from a sine wave.\",\n \"isCorrect\": false\n }\n ]\n },\n {\n \"questionText\": \"What is the main application of voltage multipliers?\",\n \"answers\": [\n {\n \"answerText\": \"Amplifying audio signals.\",\n \"isCorrect\": false\n },\n {\n \"answerText\": \"Providing high voltage for CRTs and particle accelerators.\",\n \"isCorrect\": true\n },\n {\n \"answerText\": \"Generating DC power from AC.\",\n \"isCorrect\": false\n },\n {\n \"answerText\": \"Regulating voltage in power supplies.\",\n \"isCorrect\": false\n }\n ]\n },\n {\n \"questionText\": \"What is the primary function of a half-wave voltage doubler?\",\n \"answers\": [\n {\n \"answerText\": \"To double the frequency of an AC signal.\",\n \"isCorrect\": false\n },\n {\n \"answerText\": \"To double the peak voltage of a rectified AC signal.\",\n \"isCorrect\": true\n },\n {\n \"answerText\": \"To provide a constant DC voltage.\",\n \"isCorrect\": false\n },\n {\n \"answerText\": \"To convert AC to DC with a higher efficiency than a full-wave rectifier.\",\n \"isCorrect\": false\n }\n ]\n }\n ]\n}\n```",
-      "tool_calls": [],
-      "additional_kwargs": {
-        "finishReason": "STOP",
-        "index": 0,
-        "safetyRatings": [
-          {
-            "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-            "probability": "NEGLIGIBLE"
-          },
-          {
-            "category": "HARM_CATEGORY_HATE_SPEECH",
-            "probability": "NEGLIGIBLE"
-          },
-          {
-            "category": "HARM_CATEGORY_HARASSMENT",
-            "probability": "NEGLIGIBLE"
-          },
-          {
-            "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-            "probability": "NEGLIGIBLE"
-          }
-        ]
-      },
-      "invalid_tool_calls": [],
-      "response_metadata": {
-        "finishReason": "STOP",
-        "index": 0,
-        "safetyRatings": [
-          {
-            "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-            "probability": "NEGLIGIBLE"
-          },
-          {
-            "category": "HARM_CATEGORY_HATE_SPEECH",
-            "probability": "NEGLIGIBLE"
-          },
-          {
-            "category": "HARM_CATEGORY_HARASSMENT",
-            "probability": "NEGLIGIBLE"
-          },
-          {
-            "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-            "probability": "NEGLIGIBLE"
-          }
-        ]
-      }
+  "name": "Pulse and Wave Shaping Circuits with Diodes",
+  "description": "This quiz tests your understanding of diode limiters, biased limiters, clampers, and voltage multipliers, as discussed in Lecture 4 of BECS 11413 - Basic Electronics.",
+  "questions": [
+    {
+      "questionText": "What is the main function of a diode limiter?",
+      "answers": [
+        { "answerText": "To amplify the input signal", "isCorrect": false },
+        {
+          "answerText": "To clip off portions of signal voltages above or below certain levels",
+          "isCorrect": true
+        },
+        { "answerText": "To convert AC to DC", "isCorrect": false },
+        { "answerText": "To smooth out the output signal", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "What is the purpose of a biased limiter?",
+      "answers": [
+        {
+          "answerText": "To create a fixed voltage output",
+          "isCorrect": false
+        },
+        {
+          "answerText": "To limit the output signal to a specific range",
+          "isCorrect": true
+        },
+        {
+          "answerText": "To amplify the input signal by a specific factor",
+          "isCorrect": false
+        },
+        { "answerText": "To convert DC to AC", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "What is the main function of a clamper circuit?",
+      "answers": [
+        { "answerText": "To amplify the input signal", "isCorrect": false },
+        {
+          "answerText": "To clip off portions of signal voltages above or below certain levels",
+          "isCorrect": false
+        },
+        {
+          "answerText": "To add a DC level to an AC voltage",
+          "isCorrect": true
+        },
+        { "answerText": "To convert AC to DC", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "What is a common application of voltage multipliers?",
+      "answers": [
+        { "answerText": "Audio amplifiers", "isCorrect": false },
+        { "answerText": "Power supplies", "isCorrect": false },
+        { "answerText": "Cathode-ray tubes (CRTs)", "isCorrect": true },
+        { "answerText": "Solar panels", "isCorrect": false }
+      ]
+    },
+    {
+      "questionText": "What is the main difference between a half-wave voltage doubler and a full-wave voltage doubler?",
+      "answers": [
+        {
+          "answerText": "The half-wave doubler uses one diode, while the full-wave doubler uses two diodes",
+          "isCorrect": true
+        },
+        {
+          "answerText": "The half-wave doubler doubles the input voltage, while the full-wave doubler doubles the output voltage",
+          "isCorrect": false
+        },
+        {
+          "answerText": "The half-wave doubler is more efficient than the full-wave doubler",
+          "isCorrect": false
+        },
+        {
+          "answerText": "The half-wave doubler is used for higher voltages than the full-wave doubler",
+          "isCorrect": false
+        }
+      ]
     }
-  }
+  ]
 }
