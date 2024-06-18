@@ -4,6 +4,7 @@ import { db } from "@/db";
 import { auth } from "@/lib/auth";
 import { users } from "@/db/schema";
 import { stripe } from "@/lib/stripe";
+import { getUser } from "@/utils/getUser";
 
 export async function POST(req: Request) {
   const { price, quantity = 1 } = await req.json();
@@ -21,9 +22,7 @@ export async function POST(req: Request) {
     );
   }
 
-  const user = await db.query.users.findFirst({
-    where: eq(users.id, userId),
-  });
+  const user = await getUser(userId);
 
   let customer;
 

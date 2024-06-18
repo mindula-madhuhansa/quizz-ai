@@ -52,7 +52,7 @@ export const SubscribeBtn = ({ userId, price }: Props) => {
           <Loader2Icon className="size-4 animate-spin" />
         </div>
       ) : (
-        "Upgrade To Premium"
+        "Upgrade To Pro"
       )}
     </Button>
   );

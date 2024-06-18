@@ -4,6 +4,7 @@ import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
 import { users } from "@/db/schema";
+import { getUser } from "@/utils/getUser";
 
 export async function createSubscription({
   stripeCustomerId,
@@ -39,11 +40,8 @@ export async function deleteSubscription({
   }
 }
 
-
 export async function getUserSubscription({ userId }: { userId: string }) {
-  const user = await db.query.users.findFirst({
-    where: eq(users.id, userId),
-  });
+  const user = await getUser(userId);
 
   return user?.subscribed;
 }

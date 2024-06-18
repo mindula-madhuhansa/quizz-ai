@@ -12,7 +12,7 @@ export default function SuccessPage() {
       <AlertDescription>
         Your payment was successful.
         <br />
-        You can now access all the premium features.{" "}
+        You can now access all the Pro features.{" "}
         <Link
           href="/dashboard"
           className="underline"

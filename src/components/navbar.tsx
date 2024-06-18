@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { auth, signOut } from "@/lib/auth";
+import { auth } from "@/lib/auth";
 
 import {
   DropdownMenu,
@@ -9,24 +9,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { NavMenu } from "@/components/nav-menu";
-
-function SignOut() {
-  return (
-    <form
-      action={async () => {
-        "use server";
-        await signOut();
-      }}
-    >
-      <Button
-        type="submit"
-        variant="ghost"
-      >
-        Sign Out
-      </Button>
-    </form>
-  );
-}
 
 export const Navbar = async () => {
   const session = await auth();
@@ -40,25 +22,22 @@ export const Navbar = async () => {
           </h1>
           <div>
             {session?.user ? (
-              <div className="flex items-center gap-4">
+              <>
                 {session.user.name && session.user.image && (
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="ghost">
-                        <Image
-                          src={session.user.image}
-                          alt={session.user.name}
-                          width={32}
-                          height={32}
-                          className="rounded-full"
-                        />
-                      </Button>
+                      <Image
+                        src={session.user.image}
+                        alt={session.user.name}
+                        width={32}
+                        height={32}
+                        className="rounded-full cursor-pointer hover:opacity-90"
+                      />
                     </DropdownMenuTrigger>
                     <NavMenu />
                   </DropdownMenu>
                 )}
-                <SignOut />
-              </div>
+              </>
             ) : (
               <Link href="/api/auth/signin">
                 <Button

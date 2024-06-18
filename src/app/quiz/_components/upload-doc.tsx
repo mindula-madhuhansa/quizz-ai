@@ -44,7 +44,7 @@ export const UploadDoc = () => {
 
   return (
     <>
-      <h2 className="text-3xl font-bold mb-4">
+      <h2 className={`text-3xl font-bold mb-4 ${isLoading && "animate-pulse"}`}>
         {isLoading
           ? "Generating Quiz 🧠"
           : "What do you want to review Today? 🤔"}
@@ -81,7 +81,7 @@ export const UploadDoc = () => {
             {error && <p className="text-rose-500">{error}</p>}
 
             <Button
-              type="submit"
+              variant="neo"
               size="lg"
               className="mt-4"
               disabled={isLoading}

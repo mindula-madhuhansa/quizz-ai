@@ -1,10 +1,10 @@
 "use server";
 
-import { avg, count, eq, sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 import { db } from "@/db";
 import { auth } from "@/lib/auth";
-import { quizzes, questions, quizzSubmissions, users } from "@/db/schema";
+import { quizzes, quizzSubmissions, users } from "@/db/schema";
 
 export const getHeatMapData = async () => {
   const session = await auth();
