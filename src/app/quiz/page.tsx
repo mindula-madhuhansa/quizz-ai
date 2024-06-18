@@ -159,7 +159,7 @@ export default function Quiz() {
           correctAnswer={
             questions[currentQuestion].answers.find(
               (answer) => answer.isCorrect === true
-            )?.answerText
+            )?.answerText || ""
           }
         />
         <Button
