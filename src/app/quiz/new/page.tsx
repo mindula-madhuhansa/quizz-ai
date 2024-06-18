@@ -1,4 +1,4 @@
-import { UploadDoc } from "@/quiz/_components/upload-doc";
+import { UploadDoc } from "../_components/upload-doc";
 
 export default function NewQuizPage() {
   return (

@@ -60,9 +60,9 @@ export async function POST(req: NextRequest) {
 
     const responseJson = JSON.parse(res);
 
-    const { quizId } = await saveQuiz(responseJson);
+    const { quizzId } = await saveQuiz(responseJson);
 
-    return NextResponse.json({ quizId }, { status: 200 });
+    return NextResponse.json({ quizzId }, { status: 200 });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

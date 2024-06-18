@@ -5,8 +5,9 @@ import { ChevronLeftIcon, XIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ResultCard } from "@/quiz/_components/result-card";
-import { QuizSubmission } from "@/quiz/_components/quiz-submission";
+
+import { ResultCard } from "./_components/result-card";
+import { QuizSubmission } from "./_components/quiz-submission";
 
 const questions = [
   {

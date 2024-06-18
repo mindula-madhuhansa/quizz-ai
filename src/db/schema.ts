@@ -11,16 +11,16 @@ import { relations } from "drizzle-orm";
 import type { AdapterAccount } from "@auth/core/adapters";
 
 export const users = pgTable("user", {
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+  id: text("id").notNull().primaryKey(),
   name: text("name"),
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
+  stripeCustomerId: text("stripe_customer_id"),
+  subscribed: boolean("subscribed"),
 });
 
-export const userRelations = relations(users, ({ many }) => ({
+export const usersRelations = relations(users, ({ many }) => ({
   quizzes: many(quizzes),
 }));
 
@@ -30,7 +30,7 @@ export const accounts = pgTable(
     userId: text("userId")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    type: text("type").$type<AdapterAccount>().notNull(),
+    type: text("type").$type<AdapterAccount["type"]>().notNull(),
     provider: text("provider").notNull(),
     providerAccountId: text("providerAccountId").notNull(),
     refresh_token: text("refresh_token"),
@@ -49,7 +49,7 @@ export const accounts = pgTable(
 );
 
 export const sessions = pgTable("session", {
-  sessionToken: text("sessionToken").primaryKey(),
+  sessionToken: text("sessionToken").notNull().primaryKey(),
   userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
@@ -63,31 +63,8 @@ export const verificationTokens = pgTable(
     token: text("token").notNull(),
     expires: timestamp("expires", { mode: "date" }).notNull(),
   },
-  (verificationToken) => ({
-    compositePk: primaryKey({
-      columns: [verificationToken.identifier, verificationToken.token],
-    }),
-  })
-);
-
-export const authenticators = pgTable(
-  "authenticator",
-  {
-    credentialID: text("credentialID").notNull().unique(),
-    userId: text("userId")
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
-    providerAccountId: text("providerAccountId").notNull(),
-    credentialPublicKey: text("credentialPublicKey").notNull(),
-    counter: integer("counter").notNull(),
-    credentialDeviceType: text("credentialDeviceType").notNull(),
-    credentialBackedUp: boolean("credentialBackedUp").notNull(),
-    transports: text("transports"),
-  },
-  (authenticator) => ({
-    compositePK: primaryKey({
-      columns: [authenticator.userId, authenticator.credentialID],
-    }),
+  (vt) => ({
+    compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   })
 );
 
@@ -100,23 +77,24 @@ export const quizzes = pgTable("quizzes", {
 
 export const quizzesRelations = relations(quizzes, ({ many, one }) => ({
   questions: many(questions),
+  submissions: many(quizzSubmissions),
 }));
 
 export const questions = pgTable("questions", {
   id: serial("id").primaryKey(),
   questionText: text("question_text"),
-  quizId: integer("quiz_id"),
+  quizzId: integer("quizz_id"),
 });
 
 export const questionsRelations = relations(questions, ({ one, many }) => ({
-  quiz: one(quizzes, {
-    fields: [questions.quizId],
+  quizz: one(quizzes, {
+    fields: [questions.quizzId],
     references: [quizzes.id],
   }),
   answers: many(questionAnswers),
 }));
 
-export const questionAnswers = pgTable("question_answers", {
+export const questionAnswers = pgTable("answers", {
   id: serial("id").primaryKey(),
   questionId: integer("question_id"),
   answerText: text("answer_text"),
@@ -129,6 +107,23 @@ export const questionAnswersRelations = relations(
     question: one(questions, {
       fields: [questionAnswers.questionId],
       references: [questions.id],
+    }),
+  })
+);
+
+export const quizzSubmissions = pgTable("quizz_submissions", {
+  id: serial("id").primaryKey(),
+  quizzId: integer("quizz_id"),
+  score: integer("score"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const quizzSubmissionsRelations = relations(
+  quizzSubmissions,
+  ({ one, many }) => ({
+    quizz: one(quizzes, {
+      fields: [quizzSubmissions.quizzId],
+      references: [quizzes.id],
     }),
   })
 );

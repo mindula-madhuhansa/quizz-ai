@@ -10,10 +10,12 @@ import {
   questions as dbQuestions,
   quizzes,
 } from "@/db/schema";
+import { saveSubmission } from "@/actions/saveSubmissions";
+
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ResultCard } from "@/quiz/_components/result-card";
-import { QuizSubmission } from "@/quiz/_components/quiz-submission";
+import { ResultCard } from "../_components/result-card";
+import { QuizSubmission } from "../_components/quiz-submission";
 
 type Answer = InferSelectModel<typeof questionAnswers>;
 type Question = InferSelectModel<typeof dbQuestions> & { answers: Answer[] };
@@ -69,6 +71,16 @@ export const QuizQuestions = (props: Props) => {
 
     const currentPercentage = ((currentQuestion + 1) / questions.length) * 100;
     setPercentage(currentPercentage);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const subId = await saveSubmission({ score }, props.quizz.id);
+    } catch (error) {
+      console.error(error);
+    }
+
+    setSubmitted(true);
   };
 
   const handlePressPrevious = () => {
@@ -171,17 +183,24 @@ export const QuizQuestions = (props: Props) => {
             )?.answerText || "No correct answer found"
           }
         />
-        <Button
-          variant="neo"
-          size="lg"
-          onClick={handleNext}
-        >
-          {started
-            ? currentQuestion === questions.length - 1
-              ? "Finish"
-              : "Next"
-            : "Start"}
-        </Button>
+
+        {currentQuestion === questions.length - 1 ? (
+          <Button
+            variant="neo"
+            size="lg"
+            onClick={handleSubmit}
+          >
+            Finish
+          </Button>
+        ) : (
+          <Button
+            variant="neo"
+            size="lg"
+            onClick={handleNext}
+          >
+            {started ? "Next" : "Start"}
+          </Button>
+        )}
       </footer>
     </div>
   );

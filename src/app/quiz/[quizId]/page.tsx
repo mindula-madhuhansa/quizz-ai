@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import { quizzes } from "@/db/schema";
 
-import { QuizQuestions } from "@/quiz/_components/quiz-questions";
+import { QuizQuestions } from "../_components/quiz-questions";
 
 const QuizPage = async ({
   params,
