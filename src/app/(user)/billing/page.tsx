@@ -20,8 +20,8 @@ export default async function BillingPage() {
       <h1 className="text-4xl mb-3">Billing Details</h1>
       <p className="mb-3">
         {user?.subscribed
-          ? `You are currently subscribed to the Prop plan.`
-          : "You are currently on the free plan."}
+          ? `You are currently subscribed to the Pro plan.`
+          : "You are currently on the Free plan."}
       </p>
       {user?.subscribed ? (
         <ManageSubscription />

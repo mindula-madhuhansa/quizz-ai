@@ -45,17 +45,19 @@ export const NavMenu = async () => {
       <DropdownMenuLabel>
         <div className="flex items-center">
           Welcome {username || ""}
-          <div
-            className="ml-3 p-1 
+          {subscribed && (
+            <div
+              className="ml-3 p-1 
         bg-gradient-to-tr from-blue-400 to-violet-600 
         rounded-md flex items-center gap-x-1 cursor-default"
-          >
-            <span>Pro </span>
-            <StarIcon
-              className="size-3"
-              fill="currentColor"
-            />
-          </div>
+            >
+              <span>Pro </span>
+              <StarIcon
+                className="size-3"
+                fill="currentColor"
+              />
+            </div>
+          )}
         </div>
       </DropdownMenuLabel>
       <DropdownMenuSeparator />

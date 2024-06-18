@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Loader2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-import { getStripe } from "@/lib/stripe-client";
 import { Button } from "@/components/ui/button";
 
 export const ManageSubscription = () => {
