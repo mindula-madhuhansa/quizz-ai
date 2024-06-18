@@ -8,9 +8,9 @@ import { Navbar } from "@/components/navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Tutor AI",
+  title: "TutorAI",
   description:
-    "Tutor AI is a quiz app that uses AI to generate questions and answers.",
+    "TutorAI is a quiz app that uses AI to generate questions and answers.",
 };
 
 export default function RootLayout({

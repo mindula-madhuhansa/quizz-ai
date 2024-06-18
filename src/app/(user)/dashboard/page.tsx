@@ -10,7 +10,7 @@ import { MetricCard } from "./_components/metric-card";
 import { QuizzesTable, Quiz } from "./_components/quizzes-table";
 import { HeatMapComponent as HeatMap } from "./_components/heat-map";
 
-export default async function Page() {
+export default async function Dashboard() {
   const session = await auth();
   const userId = session?.user?.id;
 

@@ -34,8 +34,13 @@ export const NavMenu = () => {
           <span>Profile</span>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <CreditCardIcon className="mr-2 size-4" />
-          <span>Billing</span>
+          <Link
+            href="/billing"
+            className="flex items-center"
+          >
+            <CreditCardIcon className="mr-2 size-4" />
+            <span>Billing</span>
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <SettingsIcon className="mr-2 size-4" />

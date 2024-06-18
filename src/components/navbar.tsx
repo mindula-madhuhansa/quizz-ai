@@ -36,7 +36,7 @@ export const Navbar = async () => {
       <nav className="px-4 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <h1 className="text-3xl font-bold">
-            <Link href="/">Tutor AI</Link>
+            <Link href="/">TutorAI</Link>
           </h1>
           <div>
             {session?.user ? (
@@ -60,7 +60,7 @@ export const Navbar = async () => {
                 <SignOut />
               </div>
             ) : (
-              <Link href="api/auth/signin">
+              <Link href="/api/auth/signin">
                 <Button
                   variant="link"
                   className="rounded-xl border"

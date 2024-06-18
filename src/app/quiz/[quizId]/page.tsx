@@ -5,13 +5,13 @@ import { quizzes } from "@/db/schema";
 
 import { QuizQuestions } from "../_components/quiz-questions";
 
-const QuizPage = async ({
+export default async function QuizPage({
   params,
 }: {
   params: {
     quizId: string;
   };
-}) => {
+}) {
   const quizId = params.quizId;
 
   const quizzesData = await db.query.quizzes.findFirst({
@@ -32,4 +32,3 @@ const QuizPage = async ({
   return <QuizQuestions quizz={quizzesData} />;
 };
 
-export default QuizPage;

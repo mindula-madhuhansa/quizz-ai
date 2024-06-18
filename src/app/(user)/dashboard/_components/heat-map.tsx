@@ -4,7 +4,6 @@ import Tooltip from "@uiw/react-tooltip";
 import HeatMap from "@uiw/react-heat-map";
 
 import { convertDate } from "@/lib/utils";
-import { date } from "drizzle-orm/mysql-core";
 
 type Props = {
   data: {
@@ -26,8 +25,6 @@ export const HeatMapComponent = (props: Props) => {
     date: convertDate(item.createdAt),
     count: item.count,
   }));
-
-  console.log(formattedDates);
 
   return (
     <HeatMap

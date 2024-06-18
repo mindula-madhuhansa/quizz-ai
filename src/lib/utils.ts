@@ -25,3 +25,5 @@ export function convertDate(date: Date): string {
   const formattedDate = `${year}/${month}/${day}`;
   return formattedDate;
 }
+
+export const PRICE_ID = "price_1PT1xBDFuo2gr4uaEXYoRJj6";
