@@ -33,10 +33,7 @@ export const UploadDoc = () => {
 
       if (res.status === 200) {
         const data = await res.json();
-        console.log(data);
-
         const quizId = data.quizzId;
-
         router.push(`/quiz/${quizId}`);
       }
     } catch (error) {

@@ -12,22 +12,28 @@ type Props = {
 export const QuizzesTable = (props: Props) => {
   return (
     <div className="rounded-md overflow-hidden p-10 border">
-      <table className="table-auto">
+      <table className="table-auto w-full border-collapse border border-gray-300">
         <thead>
           <tr>
-            <th className="text-[#6c7381] text-left">Name</th>
-            <th className="text-[#6c7381] text-left">Description</th>
+            <th className="text-[#6c7381] text-left p-4 border-b border-r border-gray-300">
+              Name
+            </th>
+            <th className="text-[#6c7381] text-left p-4 border-b border-gray-300">
+              Description
+            </th>
           </tr>
         </thead>
         <tbody>
           {props.quizzes.map((quiz: Quiz) => (
             <tr key={quiz.id}>
-              <td>
+              <td className="p-4 border-b border-r border-gray-300">
                 <Link href={`/quiz/${quiz.id}`}>
-                  <p className="text-white underline">{quiz.name}</p>
+                  <p className="text-blue-600 underline">{quiz.name}</p>
                 </Link>
               </td>
-              <td>{quiz.description}</td>
+              <td className="p-4 border-b border-gray-300">
+                {quiz.description}
+              </td>
             </tr>
           ))}
         </tbody>
