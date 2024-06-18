@@ -13,8 +13,7 @@ export default async function BillingPage() {
   const userId = session?.user?.id;
 
   if (!session || !session.user || !session.user.id) {
-    signIn();
-    return null;
+    return signIn();
   }
 
   const user = await db.query.users.findFirst({

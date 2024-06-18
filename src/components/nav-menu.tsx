@@ -58,10 +58,6 @@ export const NavMenu = async () => {
             <span>Billing</span>
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          <SettingsIcon className="mr-2 size-4" />
-          <span>Settings</span>
-        </DropdownMenuItem>
       </DropdownMenuGroup>
     </DropdownMenuContent>
   );

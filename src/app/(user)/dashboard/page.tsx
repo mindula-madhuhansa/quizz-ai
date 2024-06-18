@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
-import { auth } from "@/lib/auth";
+import { auth, signIn } from "@/lib/auth";
 import { quizzes } from "@/db/schema";
 import { getUserMetrics } from "@/actions/getUserMetrics";
 import { getHeatMapData } from "@/actions/getHeatMapData";
@@ -15,7 +15,7 @@ export default async function Dashboard() {
   const userId = session?.user?.id;
 
   if (!userId) {
-    return <p>User not found</p>;
+    return signIn();
   }
 
   const userData = await getUserMetrics();

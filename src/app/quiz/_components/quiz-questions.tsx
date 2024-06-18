@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { ResultCard } from "../_components/result-card";
 import { QuizSubmission } from "../_components/quiz-submission";
+import Image from "next/image";
 
 type Answer = InferSelectModel<typeof questionAnswers>;
 type Question = InferSelectModel<typeof dbQuestions> & { answers: Answer[] };
@@ -141,10 +142,19 @@ export const QuizQuestions = (props: Props) => {
 
       <main className="flex justify-center flex-1">
         {!started ? (
-          <h1 className="text-3xl font-semibold">Welcome to Quiz Page👋</h1>
+          <div className="flex flex-col items-center justify-center">
+            <h1 className="text-3xl font-semibold">Welcome to Quiz Page👋</h1>
+            <Image
+              src="/images/owl-start-quiz.png"
+              width="400"
+              height="400"
+              alt="owl"
+              className="object-contain ml-12"
+            />
+          </div>
         ) : (
           <div>
-            <h2 className="text-3xl font-semibold">
+            <h2 className="text-3xl font-semibold text-center">
               {questions[currentQuestion].questionText}
             </h2>
             <div className="grid grid-cols-1 gap-6 mt-6">
@@ -165,7 +175,13 @@ export const QuizQuestions = (props: Props) => {
                       handleAnswer(answer, questions[currentQuestion].id)
                     }
                   >
-                    <p className="whitespace-normal">{answer.answerText}</p>
+                    <p
+                      className="whitespace-normal 
+                    text-sm md:text-base
+                  "
+                    >
+                      {answer.answerText}
+                    </p>
                   </Button>
                 );
               })}

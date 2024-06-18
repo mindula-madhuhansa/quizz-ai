@@ -45,14 +45,14 @@ export const QuizSubmission = ({
         </header>
       </div>
 
-      <main className="py-11 flex flex-col gap-4 items-center flex-1 mt-24">
+      <main className="flex flex-col gap-2 items-center flex-1 mt-24">
         <h2 className="text-3xl font-bold">Quiz Complete! 🎊</h2>
         <p>You scored: {scorePercentage}%</p>
 
         {scorePercentage === 100 && (
           <div className="flex flex-col items-center">
             <p>Congratulations! You got a perfect score! 🎉</p>
-            <div className="flex justify-center ">
+            <div className="flex justify-center mt-4">
               <Image
                 src="/images/owl-smiling.png"
                 alt="Owl Smiling"

@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     const text = selectedDocuments.map((doc) => doc.pageContent);
 
     const prompt =
-      "given the text which is a summary of the document, generate a quiz base on the text. Return json that contains a quiz object with fields: name, description and questions. The questions is an array of objects with fields: questionText, answers. The answers is an array of the objects with fields: answerText, isCorrect.";
+      "given the text which is a summary of the document, generate a quiz base on the text. Return json that contains a quiz object with fields: name, description and questions. The questions is an array of objects with fields: questionText, answers. The answers is an array of the objects with fields: answerText, isCorrect. Don't send the correct answer as the first item in the answers array. The correct answer should be randomly placed in the answers array.";
 
     if (!process.env.GEMINI_AI_API_KEY) {
       return NextResponse.json(

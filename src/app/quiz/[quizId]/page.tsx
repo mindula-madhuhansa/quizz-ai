@@ -1,6 +1,7 @@
 import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
+import { auth, signIn } from "@/lib/auth";
 import { quizzes } from "@/db/schema";
 
 import { QuizQuestions } from "../_components/quiz-questions";
@@ -12,6 +13,13 @@ export default async function QuizPage({
     quizId: string;
   };
 }) {
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  if (!userId) {
+    return signIn();
+  }
+
   const quizId = params.quizId;
 
   const quizzesData = await db.query.quizzes.findFirst({
