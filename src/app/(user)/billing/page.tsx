@@ -21,13 +21,15 @@ export default async function BillingPage() {
     where: eq(users.id, session.user.id),
   });
 
-  const plan = user?.subscribed ? "Premium" : "Free";
+
 
   return (
     <div className="mt-12 p-4 border rounded-md">
       <h1 className="text-4xl mb-3">Billing Details</h1>
       <p className="mb-3">
-        You are currently subscribed to the <strong>{plan}</strong> plan.
+        {user?.subscribed
+          ? `You are currently subscribed to the Premium plan.`
+          : "You are currently on the free plan."}
       </p>
       {user?.subscribed ? (
         <ManageSubscription />

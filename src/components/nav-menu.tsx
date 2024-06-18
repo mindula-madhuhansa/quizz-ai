@@ -1,10 +1,12 @@
 import {
   CreditCardIcon,
   SettingsIcon,
-  UserIcon,
   BarChartBigIcon,
+  PlusIcon,
 } from "lucide-react";
+import Link from "next/link";
 
+import { auth } from "@/lib/auth";
 import {
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -12,14 +14,32 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import Link from "next/link";
 
-export const NavMenu = () => {
+export const NavMenu = async () => {
+  const session = await auth();
+
+  if (!session) {
+    return null;
+  }
+
+  if (!session?.user || !session?.user?.name) return null;
+
+  const username = session?.user?.name.split(" ")[0];
+
   return (
     <DropdownMenuContent className="w-56">
-      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuLabel>Welcome {username || "Back"}</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
+        <DropdownMenuItem>
+          <Link
+            href="/quiz/new"
+            className="flex items-center"
+          >
+            <PlusIcon className="mr-2 size-4" />
+            <span>Review</span>
+          </Link>
+        </DropdownMenuItem>
         <DropdownMenuItem>
           <Link
             href="/dashboard"
@@ -28,10 +48,6 @@ export const NavMenu = () => {
             <BarChartBigIcon className="mr-2 size-4" />
             <span>Dashboard</span>
           </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <UserIcon className="mr-2 size-4" />
-          <span>Profile</span>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Link

@@ -40,6 +40,7 @@ export const SubscribeBtn = ({ userId, price }: Props) => {
       setLoading(false);
     }
   };
+
   return (
     <Button
       disabled={loading}
